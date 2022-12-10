@@ -8,6 +8,7 @@ public class Utils {
     }
 
     public static double calculateDistanceInRoute(Route r) {
+
         double distance = 0.0;
         List<Point> pointsList = r.getRoutes();
 
