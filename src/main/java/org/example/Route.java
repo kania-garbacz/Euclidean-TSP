@@ -41,15 +41,15 @@ public class Route {
     }
 
     public void toString2() {
-        for(int i = 0; i<this.route.size()-1; i++){
+        for (int i = 0; i < this.route.size() - 1; i++) {
             this.route.get(i).showPoint2();
             System.out.print("->");
         }
-        this.route.get(this.route.size()-1).showPoint2();
+        this.route.get(this.route.size() - 1).showPoint2();
         System.out.println("\n");
     }
 
-    public int getRouteSize(){
+    public int getRouteSize() {
         return this.route.size();
     }
 }

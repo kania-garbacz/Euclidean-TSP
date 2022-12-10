@@ -5,7 +5,7 @@ import java.util.List;
 
 import static org.example.Utils.calculateDistance;
 import static org.example.Utils.calculateDistanceInRoute;
-//
+
 public class BruteForce {
 
     private double[][] tablicaDrog;
@@ -46,7 +46,7 @@ public class BruteForce {
 
         for (Route route : bfRoutePerms) {
             double currentDistance = calculateDistanceInRoute(route);
-            if(currentDistance < theShortestDistance) {
+            if (currentDistance < theShortestDistance) {
                 theShortestDistance = currentDistance;
                 shortestRoute = route;
             }
