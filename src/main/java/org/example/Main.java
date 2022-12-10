@@ -10,7 +10,6 @@ public class Main {
     }
 
     private static void testBruteForce() {
-
         System.out.println("Brute force test");
 
         ArrayList<Point> points = new ArrayList<>();
