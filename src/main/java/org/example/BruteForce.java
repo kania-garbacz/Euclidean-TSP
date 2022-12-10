@@ -5,7 +5,7 @@ import java.util.List;
 
 import static org.example.Utils.calculateDistance;
 import static org.example.Utils.calculateDistanceInRoute;
-
+//
 public class BruteForce {
 
     private double[][] tablicaDrog;
