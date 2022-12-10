@@ -9,7 +9,7 @@ public class Utils {
 
     public static double calculateDistanceInRoute(Route r) {
         double distance = 0.0;
-        List<PointNew> pointsList = r.getRoutes();
+        List<Point> pointsList = r.getRoutes();
 
         for (int i = 0; i < pointsList.size() - 1; i++) {
             distance += calculateDistance(pointsList.get(i), pointsList.get(i+1));

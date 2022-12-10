@@ -4,35 +4,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Route {
-    private final PointNew startPoint;
-    private PointNew currentPoint;
-    private List<PointNew> route = new ArrayList<>();
+    private final Point startPoint;
+    private Point currentPoint;
+    private List<Point> route = new ArrayList<>();
 
 
-    public Route(PointNew startPoint) {
+    public Route(Point startPoint) {
         this.startPoint = startPoint;
         this.currentPoint = startPoint;
         this.route.add(startPoint);
     }
 
 
-    public PointNew getStartPoint() {
+    public Point getStartPoint() {
         return startPoint;
     }
 
-    public PointNew getCurrentPoint() {
+    public Point getCurrentPoint() {
         return currentPoint;
     }
 
-    public void setCurrentPoint(PointNew currentPoint) {
+    public void setCurrentPoint(Point currentPoint) {
         this.currentPoint = currentPoint;
     }
 
-    public List<PointNew> getRoutes() {
+    public List<Point> getRoutes() {
         return route;
     }
 
-    public void setRoute(List<PointNew> route) {
+    public void setRoute(List<Point> route) {
         this.route = route;
     }
 

@@ -13,12 +13,12 @@ public class Main {
 
         System.out.println("Brute force test");
 
-        ArrayList<PointNew> points = new ArrayList<>();
-        points.add(new PointNew(0, 0, 0, false));
-        points.add(new PointNew(1, 1, 1, false));
-        points.add(new PointNew(2, 2, 2, false));
-        points.add(new PointNew(3, 30, 3, false));
-        points.add(new PointNew(4, 4, 10, false));
+        ArrayList<Point> points = new ArrayList<>();
+        points.add(new Point(0, 0, 0, false));
+        points.add(new Point(1, 1, 1, false));
+        points.add(new Point(2, 2, 2, false));
+        points.add(new Point(3, 30, 3, false));
+        points.add(new Point(4, 4, 10, false));
 
         BruteForce bruteForce = new BruteForce(points);
         bruteForce.fillTable();

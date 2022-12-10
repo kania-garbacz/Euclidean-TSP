@@ -9,7 +9,7 @@ import static org.example.Utils.calculateDistanceInRoute;
 public class BruteForce {
 
     private double[][] tablicaDrog;
-    private static List<PointNew> points;
+    private static List<Point> points;
     private int n;
 
 
@@ -19,7 +19,7 @@ public class BruteForce {
 
     private List<Route> bFRoutePerms = new ArrayList<>();
 
-    public BruteForce(List<PointNew> points) {
+    public BruteForce(List<Point> points) {
         this.points = points;
     }
 
@@ -68,7 +68,7 @@ public class BruteForce {
 
                 Route newRoute = new Route();
                 // Lazy copy
-                for (PointNew c1 : r.getRoutes()) {
+                for (Point c1 : r.getRoutes()) {
                     newRoute.getRoutes().add(c1);
                 }
 
