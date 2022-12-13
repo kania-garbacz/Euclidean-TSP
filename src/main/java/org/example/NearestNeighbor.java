@@ -15,7 +15,6 @@ public class NearestNeighbor {
         this.points = listPoints;
         this.numberOfUnvisitedPoints = this.points.size();
         this.hamiltonCycle = new ArrayList<>();
-
     }
 
     public double distance(Point a, Point b) {
