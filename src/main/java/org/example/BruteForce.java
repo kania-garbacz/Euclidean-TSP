@@ -22,10 +22,10 @@ public class BruteForce {
                 this.shortestRoute = route;
             }
         }
+    }
 
-        System.out.println("Dlugosc najkrotszej drogi: " + theShortestDistance);
-        System.out.println("Najkrotsza droga: ");
-        System.out.println(shortestRoute.toString());
+    public Route getShortestRoute() {
+        return this.shortestRoute;
     }
 
     public void permute(Route r, List<Integer> notVisited) {
@@ -43,6 +43,7 @@ public class BruteForce {
                 notVisited.add(temp);
             }
         } else {
+            // TODO zamiast zapisywac wszystkie permutacje, sprawdzenie czy sciezka jest najkrotsza mozna zrobic tutaj
             bFRoutePerms.add(r);
         }
     }

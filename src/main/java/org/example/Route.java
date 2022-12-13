@@ -4,35 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Route {
-
     private Point currentPoint;
     private List<Point> points = new ArrayList<>();
     private double length;
 
-    public Route(Point startPoint) {
-        this.currentPoint = startPoint;
-        this.points.add(startPoint);
-    }
-
-    public Point getCurrentPoint() {
-        return currentPoint;
-    }
+    public Point getCurrentPoint() { return currentPoint; }
 
     public void setCurrentPoint(Point currentPoint) {
         this.currentPoint = currentPoint;
     }
 
+    public void setPoints(List<Point> points) { this.points = points; }
+
     public List<Point> getPoints() {
         return points;
     }
 
-    public void setPoints(List<Point> points) {
-        this.points = points;
-    }
-
-    public double getLength() {
-        return length;
-    }
+    public double getLength() { return length; }
 
     public void calculateLength() {
         double distance = 0.0;
@@ -51,10 +39,14 @@ public class Route {
     public String toString() {
         StringBuilder s = new StringBuilder();
 
-        for (int i = 0; i < this.points.size() - 1; i++) {
-            s.append(this.points.get(i).toString()).append("->");
+        if(!points.isEmpty()) {
+            for (int i = 0; i < this.points.size() - 1; i++) {
+                s.append(this.points.get(i).toString()).append("->");
+            }
+            s.append(this.points.get(this.points.size() - 1).toString()).append("->");
+            s.append(this.points.get(0).toString());
         }
-        s.append(this.points.get(this.points.size() - 1).toString());
+
         return s.toString();
     }
 

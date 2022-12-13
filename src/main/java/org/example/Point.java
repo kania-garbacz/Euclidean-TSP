@@ -6,19 +6,11 @@ public class Point {
     private final int id;
     private final double x;
     private final double y;
-    private boolean visited;
 
     public Point(int vid, double vx, double vy) {
         this.id = vid;
         this.x = vx;
         this.y = vy;
-    }
-
-    public Point(int vid, double vx, double vy, boolean vVisited) {
-        this.id = vid;
-        this.x = vx;
-        this.y = vy;
-        this.visited = vVisited;
     }
 
     double getX() {
@@ -32,7 +24,6 @@ public class Point {
     int getId() {
         return this.id;
     }
-
 
     @Override
     public String toString() {
