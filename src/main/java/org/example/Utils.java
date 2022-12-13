@@ -15,7 +15,7 @@ public class Utils {
         for (int i = 0; i < pointsList.size() - 1; i++) {
             distance += calculateDistance(pointsList.get(i), pointsList.get(i + 1));
         }
-        distance += calculateDistance(pointsList.get(0), pointsList.get(pointsList.size() - 1));
+        distance += calculateDistance(pointsList.get(pointsList.size() - 1), pointsList.get(0));
 
         return distance;
     }
