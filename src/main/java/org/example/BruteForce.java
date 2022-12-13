@@ -57,9 +57,6 @@ public class BruteForce {
     }
 
     public void permute(Route r, List<Integer> notVisited) {
-
-        boolean isBruteForce = true;
-
         if (!notVisited.isEmpty()) {
 
             for (int i = 0; i < notVisited.size(); i++) {
