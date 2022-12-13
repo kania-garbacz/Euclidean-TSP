@@ -3,36 +3,28 @@ package org.example;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.example.Utils.calculateDistanceInRoute;
-
 public class BruteForce {
     private static List<Point> points;
+    private final List<Route> bFRoutePerms = new ArrayList<>();
     private Route shortestRoute;
 
-
-    public List<Route> getbFRoutePerms() {
-        return bFRoutePerms;
-    }
-
-    private List<Route> bFRoutePerms = new ArrayList<>();
-
     public BruteForce(List<Point> points) {
-        this.points = points;
+        BruteForce.points = points;
     }
 
-    public void findShortestPermutation(List<Route> bfRoutePerms) {
+    public void findShortestPermutation() {
         double theShortestDistance = Double.MAX_VALUE;
 
-        for (Route route : bfRoutePerms) {
-            double currentDistance = calculateDistanceInRoute(route);
-            if (currentDistance < theShortestDistance) {
-                theShortestDistance = currentDistance;
+        for (Route route : bFRoutePerms) {
+            route.calculateLength();
+            if (route.getLength() < theShortestDistance) {
+                theShortestDistance = route.getLength();
                 this.shortestRoute = route;
             }
         }
 
-        System.out.println("Dlugosc najkrotszej trasy: " + theShortestDistance);
-        System.out.println("Najkrotsza trasa: ");
+        System.out.println("Dlugosc najkrotszej drogi: " + theShortestDistance);
+        System.out.println("Najkrotsza droga: ");
         System.out.println(shortestRoute.toString());
     }
 
@@ -42,11 +34,11 @@ public class BruteForce {
                 int temp = notVisited.remove(0);
 
                 Route newRoute = new Route();
-                for (Point c1 : r.getRoutes()) {
-                    newRoute.getRoutes().add(c1);
+                for (Point c1 : r.getPoints()) {
+                    newRoute.getPoints().add(c1);
                 }
 
-                newRoute.getRoutes().add(points.get(temp));
+                newRoute.getPoints().add(points.get(temp));
                 permute(newRoute, notVisited);
                 notVisited.add(temp);
             }
