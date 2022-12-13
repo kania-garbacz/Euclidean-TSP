@@ -33,7 +33,7 @@ public class Main {
         List<Route> routes = bruteForce.getbFRoutePerms();
 
         for (int i = 0; i < routes.size(); i++) {
-            routes.get(i).toString2();
+            System.out.println(routes.get(i).toString());
         }
 
         bruteForce.findShortestPermutation(routes);

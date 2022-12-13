@@ -16,10 +16,6 @@ public class Route {
     }
 
 
-    public Point getStartPoint() {
-        return startPoint;
-    }
-
     public Point getCurrentPoint() {
         return currentPoint;
     }
@@ -40,16 +36,13 @@ public class Route {
         startPoint = null;
     }
 
-    public void toString2() {
-        for (int i = 0; i < this.route.size() - 1; i++) {
-            this.route.get(i).showPoint2();
-            System.out.print("->");
-        }
-        this.route.get(this.route.size() - 1).showPoint2();
-        System.out.println("\n");
-    }
+    public String toString() {
+        String s = "";
 
-    public int getRouteSize() {
-        return this.route.size();
+        for (int i = 0; i < this.route.size() - 1; i++) {
+            s += this.route.get(i).toString() + "->";
+        }
+        s += this.route.get(this.route.size() - 1).toString();
+        return s;
     }
 }

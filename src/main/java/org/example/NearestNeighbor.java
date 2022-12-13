@@ -24,15 +24,17 @@ public class NearestNeighbor {
 
     //wyświetl wszystkie elementy w liście punktów typu punkt
     public void showPoints() {
-        this.points.forEach(Point::showPoint);
+        for (Point p : points) {
+            System.out.println(p.toString());
+        }
     }
 
     public void showHamiltonCycle() {
         for (int i = 0; i < this.hamiltonCycle.size() - 1; i++) {
-            this.hamiltonCycle.get(i).showPoint2();
+            System.out.print(this.hamiltonCycle.get(i).toString());
             System.out.print("->");
         }
-        this.hamiltonCycle.get(this.hamiltonCycle.size() - 1).showPoint2();
+        System.out.println(this.hamiltonCycle.get(this.hamiltonCycle.size() - 1).toString());
     }
 
     public double getRouteCost() {

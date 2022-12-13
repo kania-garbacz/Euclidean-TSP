@@ -34,20 +34,8 @@ public class Point {
     }
 
 
-    void showPoint() {
-        System.out.println("ID" + "[" + this.id + "]" + "(" + this.x + "," + this.y + ")");
-    }
-
-    void showPoint2() {
-        System.out.print("(" + this.x + "," + this.y + ")");
-    }
-
     @Override
     public String toString() {
-        return "Point{" +
-                "id=" + id +
-                ", x=" + x +
-                ", y=" + y +
-                '}';
+        return "(" + this.x + "," + this.y + ")";
     }
 }

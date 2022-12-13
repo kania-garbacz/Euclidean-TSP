@@ -53,7 +53,7 @@ public class BruteForce {
         }
         System.out.println("Dlugosc najkrotszej trasy: " + theShortestDistance);
         System.out.println("Najkrotsza trasa: ");
-        shortestRoute.toString2();
+        System.out.println(shortestRoute.toString());
     }
 
     public void permute(Route r, List<Integer> notVisited) {
