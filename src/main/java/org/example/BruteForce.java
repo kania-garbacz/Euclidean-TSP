@@ -50,7 +50,6 @@ public class BruteForce {
         } else {
             // Route is complete
             routeSize = calculateDistanceInRoute(r);
-
             if (routeSize < najkrotszyDystans) {
                 najkrotszyDystans = routeSize;
                 najkrotszaTrasa = r;

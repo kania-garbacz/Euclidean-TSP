@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Route {
+    private Point startPoint;
     private Point currentPoint;
     private List<Point> pointsList = new ArrayList<>();
 
