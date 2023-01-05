@@ -22,11 +22,15 @@ public class Main {
             pointsNums.add(i);
         }
 
+        long start = System.currentTimeMillis();
         bruteForce.permute(new Route(), pointsNums);
+        long end = System.currentTimeMillis();
+
 
         System.out.println("Najkrotsza trasa: ");
         System.out.println(bruteForce.getNajkrotszaTrasa().toString());
         System.out.println("Dlugosc najkrotszej trasy: " + bruteForce.getNajkrotszyDystans());
+        System.out.println("Czas dzialania algorytmu: " + (end - start) + " ms");
 
     }
 
@@ -35,11 +39,14 @@ public class Main {
         NearestNeighbor nearestNeighbor = new NearestNeighbor(points);
 
         nearestNeighbor.setStartingPoint();
+        long start = System.currentTimeMillis();
         nearestNeighbor.solve();
+        long end = System.currentTimeMillis();
         nearestNeighbor.showHamiltonCycle();
 
         System.out.println("\n");
-        System.out.println("Koszt drogi:" + nearestNeighbor.getRouteCost());
+        System.out.println("Dlugosc najkrotszej trasy: " + nearestNeighbor.getRouteCost());
+        System.out.println("Czas dzialania algorytmu: " + (end - start) + " ms");
 
     }
 
