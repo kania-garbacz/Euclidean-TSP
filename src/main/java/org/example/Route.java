@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Route {
-    private final Point startPoint;
     private Point currentPoint;
     private List<Point> pointsList = new ArrayList<>();
 
@@ -36,7 +35,6 @@ public class Route {
     }
 
     public Route() {
-        startPoint = null;
     }
 
     public String toString() {
@@ -50,5 +48,9 @@ public class Route {
 
     public int getRouteSize() {
         return this.pointsList.size();
+    }
+
+    public double calculateDistance(Point a, Point b) {
+        return Math.sqrt(Math.pow(b.getX() - a.getX(), 2) + Math.pow(b.getY() - a.getY(), 2));
     }
 }

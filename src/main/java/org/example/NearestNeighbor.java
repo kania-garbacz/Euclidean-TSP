@@ -22,17 +22,12 @@ public class NearestNeighbor {
         return Math.sqrt(Math.pow(b.getX() - a.getX(), 2) + Math.pow(b.getY() - a.getY(), 2));
     }
 
-    //wyświetl wszystkie elementy w liście punktów typu punkt
-    public void showPoints() {
-        this.points.forEach(Point::showPoint);
-    }
-
     public void showHamiltonCycle() {
         for (int i = 0; i < this.hamiltonCycle.size() - 1; i++) {
-            this.hamiltonCycle.get(i).showPoint2();
+            System.out.print(this.hamiltonCycle.get(i).toString());
             System.out.print("->");
         }
-        this.hamiltonCycle.get(this.hamiltonCycle.size() - 1).showPoint2();
+        System.out.println(this.hamiltonCycle.get(this.hamiltonCycle.size() - 1).toString());
     }
 
     public double getRouteCost() {
@@ -41,7 +36,6 @@ public class NearestNeighbor {
 
     //Ustawienie pierwszego punktu na początek listy
     public void setStartingPoint() {
-        this.showPoints();
         Scanner input = new Scanner(System.in);
         System.out.print("Enter an ID: ");
         int number = input.nextInt();
@@ -49,12 +43,10 @@ public class NearestNeighbor {
         //znajdz element w liście puntów
         for (Point spoint : this.points) {
             if (spoint.getId() == number) {
-                System.out.println(spoint);
                 int index = this.points.indexOf(spoint);
                 Collections.swap(this.points, index, 0);
             }
         }
-        this.showPoints();
     }
 
     public void solve() {
@@ -79,7 +71,6 @@ public class NearestNeighbor {
                     previousDistance = currentDistance;
                     previousPoint = point;
                     index = this.points.indexOf(point);
-                    System.out.println(previousDistance);
                 }
             }
             //po sprawdzeniu która ścieżka jest najkrótsza, to wybieramy ten punkt i dodajemy go do cyklu Hamiltona
