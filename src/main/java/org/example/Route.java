@@ -6,15 +6,14 @@ import java.util.List;
 public class Route {
     private final Point startPoint;
     private Point currentPoint;
-    private List<Point> route = new ArrayList<>();
+    private List<Point> pointsList = new ArrayList<>();
 
 
     public Route(Point startPoint) {
         this.startPoint = startPoint;
         this.currentPoint = startPoint;
-        this.route.add(startPoint);
+        this.pointsList.add(startPoint);
     }
-
 
     public Point getStartPoint() {
         return startPoint;
@@ -29,27 +28,27 @@ public class Route {
     }
 
     public List<Point> getRoutes() {
-        return route;
+        return pointsList;
     }
 
-    public void setRoute(List<Point> route) {
-        this.route = route;
+    public void setPointsList(List<Point> pointsList) {
+        this.pointsList = pointsList;
     }
 
     public Route() {
         startPoint = null;
     }
 
-    public void toString2() {
-        for (int i = 0; i < this.route.size() - 1; i++) {
-            this.route.get(i).showPoint2();
-            System.out.print("->");
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < this.pointsList.size() - 1; i++) {
+            result.append("(").append(this.pointsList.get(i).getX()).append(",").append(this.pointsList.get(i).getY()).append(") -> ");
         }
-        this.route.get(this.route.size() - 1).showPoint2();
-        System.out.println("\n");
+        result.append("(").append(this.pointsList.get(this.pointsList.size() - 1).getX()).append(",").append(this.pointsList.get(this.pointsList.size() - 1).getY()).append(")");
+        return result.toString();
     }
 
     public int getRouteSize() {
-        return this.route.size();
+        return this.pointsList.size();
     }
 }

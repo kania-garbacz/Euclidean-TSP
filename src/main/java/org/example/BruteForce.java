@@ -1,64 +1,31 @@
 package org.example;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static org.example.Utils.calculateDistance;
 import static org.example.Utils.calculateDistanceInRoute;
 
 public class BruteForce {
 
-    private double[][] tablicaDrog;
-    private static List<Point> points;
-    private int n;
+    private final List<Point> points;
 
-
-    public List<Route> getbFRoutePerms() {
-        return bFRoutePerms;
-    }
-
-    private List<Route> bFRoutePerms = new ArrayList<>();
+    private Route najkrotszaTrasa;
+    private double najkrotszyDystans;
 
     public BruteForce(List<Point> points) {
         this.points = points;
+        this.najkrotszyDystans = Double.MAX_VALUE;
     }
 
-    public void fillTable() {
-        if (points != null) {
-            n = points.size();
-            tablicaDrog = new double[n][n];
-
-            for (int i = 0; i < points.size(); i++) {
-                for (int j = 0; j < points.size(); j++) {
-                    if (i == j) {
-                        tablicaDrog[i][j] = 0.0;
-                    } else {
-                        tablicaDrog[i][j] = calculateDistance(points.get(i), points.get(j));
-                    }
-                }
-            }
-        }
+    public Route getNajkrotszaTrasa() {
+        return najkrotszaTrasa;
     }
 
-    public void findShortestPermutation(List<Route> bfRoutePerms) {
-        double theShortestDistance = Double.MAX_VALUE;
-        Route shortestRoute = null;
-
-        for (Route route : bfRoutePerms) {
-            double currentDistance = calculateDistanceInRoute(route);
-            if (currentDistance < theShortestDistance) {
-                theShortestDistance = currentDistance;
-                shortestRoute = route;
-            }
-        }
-        System.out.println("Dlugosc najkrotszej trasy: " + theShortestDistance);
-        System.out.println("Najkrotsza trasa: ");
-        shortestRoute.toString2();
+    public double getNajkrotszyDystans() {
+        return najkrotszyDystans;
     }
 
     public void permute(Route r, List<Integer> notVisited) {
-
-        boolean isBruteForce = true;
+        double routeSize;
 
         if (!notVisited.isEmpty()) {
 
@@ -82,19 +49,11 @@ public class BruteForce {
             }
         } else {
             // Route is complete
-            bFRoutePerms.add(r);
-        }
-    }
+            routeSize = calculateDistanceInRoute(r);
 
-    private void solve(boolean[] visited, double d) {
-        for (int i = 0; i < n; i++) {
-            if (!visited[i]) {
-                for (int j = 0; j < n; j++) {
-                    if ((i != j) && !visited[j]) {
-                        d += calculateDistance(points.get(i), points.get(j));
-                        solve(visited, d);
-                    }
-                }
+            if (routeSize < najkrotszyDystans) {
+                najkrotszyDystans = routeSize;
+                najkrotszaTrasa = r;
             }
         }
     }

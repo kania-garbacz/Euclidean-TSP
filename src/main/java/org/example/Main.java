@@ -20,7 +20,6 @@ public class Main {
         points.add(new Point(4, 4, 10, false));
 
         BruteForce bruteForce = new BruteForce(points);
-        bruteForce.fillTable();
 
         List<Integer> pointsNums = new ArrayList<>();
 
@@ -30,17 +29,14 @@ public class Main {
 
         bruteForce.permute(new Route(), pointsNums);
 
-        List<Route> routes = bruteForce.getbFRoutePerms();
+        System.out.println("Najkrotsza trasa: ");
+        System.out.println(bruteForce.getNajkrotszaTrasa().toString());
+        System.out.println("Dlugosc najkrotszej trasy: " + bruteForce.getNajkrotszyDystans());
 
-        for (int i = 0; i < routes.size(); i++) {
-            routes.get(i).toString2();
-        }
-
-        bruteForce.findShortestPermutation(routes);
     }
 
     private static void testNearestNeighbour() {
-        ArrayList<Point> points = new ArrayList<Point>();
+        ArrayList<Point> points = new ArrayList<>();
         points.add(new Point(0, 0, 0));
         points.add(new Point(1, 1, 1));
         points.add(new Point(2, 2, 2));
