@@ -2,16 +2,17 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class NearestNeighbor {
-    private ArrayList<Point> points;
+    private List<Point> points;
     private ArrayList<Point> hamiltonCycle;
     private double routeCost = 0;
     private int numberOfUnvisitedPoints;
 
 
-    public NearestNeighbor(ArrayList<Point> listPoints) {
+    public NearestNeighbor(List<Point> listPoints) {
         this.points = listPoints;
         this.numberOfUnvisitedPoints = this.points.size();
         this.hamiltonCycle = new ArrayList<>();

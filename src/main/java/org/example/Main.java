@@ -4,15 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    static ArrayList<Point> points = new ArrayList<>();
+    static List<Point> points = new ArrayList<>();
 
     public static void main(String[] args) {
-        points.add(new Point(0, 110, -80));
-        points.add(new Point(1, 1, 1));
-        points.add(new Point(2, 2, 2));
-        points.add(new Point(3, 30, 3));
-        points.add(new Point(4, 4, 10));
-        points.add(new Point(5, 4, 10));
+        points = Utils.generatePoints(10, -3, 10);
 
         testBruteForce();
         testNearestNeighbour();
