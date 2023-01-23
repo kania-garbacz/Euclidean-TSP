@@ -13,14 +13,14 @@ public class Main {
 
 
     public static void main(String[] args) {
-        String[] header = {"Liczba punktow","Liczba operacji" ,"Czas dzialania (ms)", "Liczba obiektow"};
+        String[] header = {"Liczba punktow","Liczba operacji" ,"Czas dzialania (ms)", "Liczba obiektow","Błąd bezwzględny","Błąd względny"};
 
         statisticlist = new ArrayList<>();
         statisticlist.add(header);
 
-        testBruteForce();
+        //testBruteForce();
 //        testNearestNeighbour();
-
+        compareDistances();
         // default all fields are enclosed in double quotes
         // default separator is a comma
         try (CSVWriter writer = new CSVWriter(new FileWriter("./result.csv"), ';', '"', '"', "\n")) {
@@ -98,6 +98,36 @@ public class Main {
             statisticlist.add(csvData);
         }
 
+
+    }
+    private static void compareDistances(){
+        for (int counter = 1; counter < 11 ; counter++){
+            points = Utils.generatePoints(counter, -3, 10);
+            BruteForce bruteForce = new BruteForce(points);
+
+            List<Integer> pointsNums = new ArrayList<>();
+            for (int i = 0; i < points.size(); i++) {
+                pointsNums.add(i);
+            }
+
+            bruteForce.solve(new Route(), pointsNums);
+
+            NearestNeighbor nearestNeighbor = new NearestNeighbor(points);
+            nearestNeighbor.solve();
+            double droga_NN = nearestNeighbor.getRouteCost();
+            double droga_BF = bruteForce.getNajkrotszyDystans();
+            double bezwzgledny = Math.sqrt(Math.pow(droga_BF-droga_NN,2));
+            System.out.println("--------------------------------");
+            System.out.println("droga_NN="+droga_NN);
+            System.out.println("droga_BF="+droga_BF);
+            System.out.println("bezwzgledny="+bezwzgledny);
+            System.out.println("wzgledny="+((bezwzgledny/droga_BF)*100));
+            System.out.println("--------------------------------");
+            String[] csvData = {String.valueOf(counter), String.valueOf("---"), String.valueOf("---"), String.valueOf("---"),
+                    String.valueOf(bezwzgledny),String.valueOf((bezwzgledny/droga_BF)*100)};
+            statisticlist.add(csvData);
+
+        }
 
     }
 
