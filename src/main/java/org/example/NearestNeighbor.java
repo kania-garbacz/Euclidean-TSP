@@ -11,12 +11,7 @@ public class NearestNeighbor {
     private double routeCost = 0;
     private int numberOfUnvisitedPoints;
     private int liczba_operacji =0;
-
-    private  Runtime rt = Runtime.getRuntime();
-    private long total_mem = rt.totalMemory();
-    private long free_mem = rt.freeMemory();
-
-
+    private int memorySize = 0;
     public NearestNeighbor(List<Point> listPoints) {
         this.points = listPoints;
         this.numberOfUnvisitedPoints = this.points.size();
@@ -62,11 +57,11 @@ public class NearestNeighbor {
         this.hamiltonCycle.add(curretPointBuffor);//Początkowy punkt dodajemy do naszego cyklu hamiltona
         this.points.remove(0);// Punkt podstawowy usuwamy z naszej listy punktów nieodwiedzonych
         this.numberOfUnvisitedPoints--;// Odwiedzilismy pierwszy punkt więc dekrementujemy liczbę nieodwiedzonych punktów
-
+        double previousDistance;
 
         while (this.numberOfUnvisitedPoints > 0) {
             // sprawdzamy która ścieżka jest nakrótsza
-            double previousDistance = Double.MAX_VALUE; // wartości początkowe
+            previousDistance = Double.MAX_VALUE; // wartości początkowe
             Point previousPoint = null;
             int index = 0;
 
@@ -99,9 +94,8 @@ public class NearestNeighbor {
         this.routeCost += Distance;
         System.out.println(Distance);
         System.out.println("liczba operacji:"+this.liczba_operacji);
-        long used_mem = total_mem - free_mem;
-        System.out.println("Amount of used memory: " + used_mem);
 
+        memorySize = points.size() + hamiltonCycle.size() + 7;
     }
 
 
