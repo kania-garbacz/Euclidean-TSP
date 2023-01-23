@@ -18,12 +18,12 @@ public class Main {
         statisticlist = new ArrayList<>();
         statisticlist.add(header);
 
-        //testBruteForce();
-        testNearestNeighbour();
+        testBruteForce();
+//        testNearestNeighbour();
 
         // default all fields are enclosed in double quotes
         // default separator is a comma
-        try (CSVWriter writer = new CSVWriter(new FileWriter("./result.csv"),';', '"', '"', "\n")) {
+        try (CSVWriter writer = new CSVWriter(new FileWriter("./result.csv"), ';', '"', '"', "\n")) {
             writer.writeAll(statisticlist);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -41,42 +41,45 @@ public class Main {
             timeCount = 0;
             memoryCount = 0;
 
-            for (int repeats = 0; repeats < repeatCount; repeats++) {
-                points = Utils.generatePoints(counter, -3, 10);
+//            for (int repeats = 0; repeats < repeatCount; repeats++) {
+            points = Utils.generatePoints(counter, -3, 10);
 
 
-                BruteForce bruteForce = new BruteForce(points);
+            BruteForce bruteForce = new BruteForce(points);
 
-                List<Integer> pointsNums = new ArrayList<>();
-                for (int i = 0; i < points.size(); i++) {
-                    pointsNums.add(i);
-                }
-
-                long start = System.currentTimeMillis();
-//        Metoda generująca najkrótszą ścieżkę Hamiltona
-                bruteForce.permute(new Route(), pointsNums);
-                long end = System.currentTimeMillis();
-
-                timeCount += (end - start);
-                memoryCount += bruteForce.getMemorySize();
-
-                System.out.println("Liczba puntkow: " + counter);
-                System.out.println("Najkrotsza trasa: ");
-                System.out.println(bruteForce.getNajkrotszaTrasa().toString());
-                System.out.println("Dlugosc najkrotszej trasy: " + bruteForce.getNajkrotszyDystans());
-                System.out.println("Czas dzialania algorytmu: " + (end - start) + " ms");
-                System.out.println("Zuzycie pamieci: " + bruteForce.getMemorySize());
+            List<Integer> pointsNums = new ArrayList<>();
+            for (int i = 0; i < points.size(); i++) {
+                pointsNums.add(i);
             }
 
+            long start = System.currentTimeMillis();
+//        Metoda generująca najkrótszą ścieżkę Hamiltona
+            bruteForce.solve(new Route(), pointsNums);
+            long end = System.currentTimeMillis();
 
-            String[] csvData = {String.valueOf(counter), String.valueOf((double) timeCount / repeatCount), String.valueOf(memoryCount / repeatCount)};
+            timeCount += (end - start);
+            memoryCount += bruteForce.getMemorySize();
+
+            System.out.println("Liczba puntkow: " + counter);
+            System.out.println("Najkrotsza trasa: ");
+            System.out.println(bruteForce.getNajkrotszaTrasa().toString());
+            System.out.println("Dlugosc najkrotszej trasy: " + bruteForce.getNajkrotszyDystans());
+            System.out.println("Czas dzialania algorytmu: " + (end - start) + " ms");
+            System.out.println("Zuzycie pamieci: " + bruteForce.getMemorySize());
+
+            String[] csvData = {String.valueOf(counter), String.valueOf(bruteForce.getLiczba_operacji()), String.valueOf(timeCount), String.valueOf(memoryCount)};
             statisticlist.add(csvData);
         }
+
+
+//            String[] csvData = {String.valueOf(counter), String.valueOf((double) timeCount / repeatCount), String.valueOf(memoryCount / repeatCount)};
+//        statisticlist.add(csvData);
+//        }
     }
 
     private static void testNearestNeighbour() {
         System.out.println("Nearest neighbour test");
-        for (int counter = 1; counter < 501; counter++){
+        for (int counter = 1; counter < 501; counter++) {
             points = Utils.generatePoints(counter, -3, 10);
             NearestNeighbor nearestNeighbor = new NearestNeighbor(points);
 
@@ -91,7 +94,7 @@ public class Main {
             System.out.println("Czas dzialania algorytmu: " + (end - start) + " ns");
             System.out.println("-------------------------------------------------------------------");
 
-            String[] csvData = {String.valueOf(counter), String.valueOf( nearestNeighbor.getLiczba_operacji()), String.valueOf((end - start)), String.valueOf(nearestNeighbor.getMemorySize())};
+            String[] csvData = {String.valueOf(counter), String.valueOf(nearestNeighbor.getLiczba_operacji()), String.valueOf((end - start)), String.valueOf(nearestNeighbor.getMemorySize())};
             statisticlist.add(csvData);
         }
 
