@@ -13,13 +13,13 @@ public class Main {
 
 
     public static void main(String[] args) {
-        String[] header = {"Liczba punktow", "Czas dzialania (ms)", "Liczba obiektow"};
+        String[] header = {"Liczba punktow","Liczba operacji" ,"Czas dzialania (ms)", "Liczba obiektow"};
 
         statisticlist = new ArrayList<>();
         statisticlist.add(header);
 
-        testBruteForce();
-//        testNearestNeighbour();
+        //testBruteForce();
+        testNearestNeighbour();
 
         // default all fields are enclosed in double quotes
         // default separator is a comma
@@ -76,17 +76,25 @@ public class Main {
 
     private static void testNearestNeighbour() {
         System.out.println("Nearest neighbour test");
-        NearestNeighbor nearestNeighbor = new NearestNeighbor(points);
+        for (int counter = 1; counter < 501; counter++){
+            points = Utils.generatePoints(counter, -3, 10);
+            NearestNeighbor nearestNeighbor = new NearestNeighbor(points);
 
-        nearestNeighbor.setStartingPoint();
-        long start = System.currentTimeMillis();
-        nearestNeighbor.solve();
-        long end = System.currentTimeMillis();
-        nearestNeighbor.showHamiltonCycle();
+            //nearestNeighbor.setStartingPoint();
+            long start = System.nanoTime();
+            nearestNeighbor.solve();
+            long end = System.nanoTime();
+            //nearestNeighbor.showHamiltonCycle();
 
-        System.out.println("\n");
-        System.out.println("Dlugosc najkrotszej trasy: " + nearestNeighbor.getRouteCost());
-        System.out.println("Czas dzialania algorytmu: " + (end - start) + " ms");
+            System.out.println("\n");
+            System.out.println("Dlugosc najkrotszej trasy: " + nearestNeighbor.getRouteCost());
+            System.out.println("Czas dzialania algorytmu: " + (end - start) + " ns");
+            System.out.println("-------------------------------------------------------------------");
+
+            String[] csvData = {String.valueOf(counter), String.valueOf( nearestNeighbor.getLiczba_operacji()), String.valueOf((end - start)), String.valueOf(nearestNeighbor.getMemorySize())};
+            statisticlist.add(csvData);
+        }
+
 
     }
 

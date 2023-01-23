@@ -35,6 +35,14 @@ public class NearestNeighbor {
         return this.routeCost;
     }
 
+    public int getLiczba_operacji() {
+        return liczba_operacji;
+    }
+
+    public int getMemorySize() {
+        return memorySize;
+    }
+
     //Ustawienie pierwszego punktu na początek listy
     public void setStartingPoint() {
         Scanner input = new Scanner(System.in);
@@ -57,11 +65,14 @@ public class NearestNeighbor {
         this.hamiltonCycle.add(curretPointBuffor);//Początkowy punkt dodajemy do naszego cyklu hamiltona
         this.points.remove(0);// Punkt podstawowy usuwamy z naszej listy punktów nieodwiedzonych
         this.numberOfUnvisitedPoints--;// Odwiedzilismy pierwszy punkt więc dekrementujemy liczbę nieodwiedzonych punktów
-        double previousDistance;
+        //double previousDistance;
+        this.liczba_operacji +=7;
+
+
 
         while (this.numberOfUnvisitedPoints > 0) {
             // sprawdzamy która ścieżka jest nakrótsza
-            previousDistance = Double.MAX_VALUE; // wartości początkowe
+            double previousDistance = Double.MAX_VALUE; // wartości początkowe
             Point previousPoint = null;
             int index = 0;
 
@@ -72,7 +83,7 @@ public class NearestNeighbor {
                     previousDistance = currentDistance;
                     previousPoint = point;
                     index = this.points.indexOf(point);
-                    this.liczba_operacji++;
+                    this.liczba_operacji +=3;
                 }
                 this.liczba_operacji++;
             }
@@ -86,16 +97,20 @@ public class NearestNeighbor {
             this.points.remove(index);
             // dekrementujemy liczbę nieodwiedzonych puntków
             this.numberOfUnvisitedPoints--;
+            this.liczba_operacji +=5;
 
         }
         this.hamiltonCycle.add(firstPoint);
         double Distance = this.distance(curretPointBuffor, firstPoint);
         //Teraz musimy obliczyć odległość między ostatnim a pierwszym i dodać go na koniec wizualizacji cyklu hamiltona
         this.routeCost += Distance;
+        this.liczba_operacji+=3;
         System.out.println(Distance);
-        System.out.println("liczba operacji:"+this.liczba_operacji);
 
-        memorySize = points.size() + hamiltonCycle.size() + 7;
+
+
+
+        this.memorySize = points.size() + hamiltonCycle.size() + 7;
     }
 
 
