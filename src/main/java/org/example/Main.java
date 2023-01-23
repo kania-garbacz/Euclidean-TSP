@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         points = Utils.generatePoints(10, -3, 10);
 
-        testBruteForce();
+        //testBruteForce();
         testNearestNeighbour();
     }
 
@@ -18,9 +18,6 @@ public class Main {
         BruteForce bruteForce = new BruteForce(points);
 
         List<Integer> pointsNums = new ArrayList<>();
-        for (int i = 0; i < points.size(); i++) {
-            pointsNums.add(i);
-        }
 
         long start = System.currentTimeMillis();
         bruteForce.permute(new Route(), pointsNums);
