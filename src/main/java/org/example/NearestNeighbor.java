@@ -105,7 +105,7 @@ public class NearestNeighbor {
         //Teraz musimy obliczyć odległość między ostatnim a pierwszym i dodać go na koniec wizualizacji cyklu hamiltona
         this.routeCost += Distance;
         this.liczba_operacji+=3;
-        System.out.println(Distance);
+        //System.out.println(Distance);
 
 
 

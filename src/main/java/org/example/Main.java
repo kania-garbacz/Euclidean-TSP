@@ -19,10 +19,12 @@ public class Main {
         statisticlist.add(header);
 
         //testBruteForce();
-//        testNearestNeighbour();
-        compareDistances();
+        //testNearestNeighbour();
+        //compareDistances();
+        BruteForceWithResults();
         // default all fields are enclosed in double quotes
         // default separator is a comma
+        NearestNeighbourWithResults();
         try (CSVWriter writer = new CSVWriter(new FileWriter("./result.csv"), ';', '"', '"', "\n")) {
             writer.writeAll(statisticlist);
         } catch (IOException e) {
@@ -90,7 +92,7 @@ public class Main {
             //nearestNeighbor.showHamiltonCycle();
 
             System.out.println("\n");
-            System.out.println("Dlugosc najkrotszej trasy: " + nearestNeighbor.getRouteCost());
+            System.out.println("Dlugosc trasy trasy: " + nearestNeighbor.getRouteCost());
             System.out.println("Czas dzialania algorytmu: " + (end - start) + " ns");
             System.out.println("-------------------------------------------------------------------");
 
@@ -100,9 +102,45 @@ public class Main {
 
 
     }
+    private static void BruteForceWithResults(){
+        points = Utils.generatePoints(10, -3, 10);
+
+
+        BruteForce bruteForce = new BruteForce(points);
+
+        List<Integer> pointsNums = new ArrayList<>();
+        for (int i = 0; i < points.size(); i++) {
+            pointsNums.add(i);
+        }
+
+        long start = System.currentTimeMillis();
+//        Metoda generująca najkrótszą ścieżkę Hamiltona
+        bruteForce.solve(new Route(), pointsNums);
+        long end = System.currentTimeMillis();
+
+
+
+        System.out.println("Liczba puntkow: " + points.size());
+        System.out.println("Najkrotsza trasa: ");
+        System.out.println(bruteForce.getNajkrotszaTrasa().toString());
+        System.out.println("Dlugosc najkrotszej trasy: " + bruteForce.getNajkrotszyDystans());
+
+
+
+    }
+    private static void NearestNeighbourWithResults(){
+        System.out.println("Nearest neighbour");
+        points = Utils.generatePoints(10, -3, 10);
+        NearestNeighbor nearestNeighbor = new NearestNeighbor(points);
+        System.out.println("Liczba puntkow: " + points.size());
+        nearestNeighbor.setStartingPoint();
+        nearestNeighbor.solve();
+        nearestNeighbor.showHamiltonCycle();
+        System.out.println("Dlugosc trasy trasy: " + nearestNeighbor.getRouteCost());
+    }
     private static void compareDistances(){
-        for (int counter = 1; counter < 11 ; counter++){
-            points = Utils.generatePoints(counter, -3, 10);
+        for (int counter = 1; counter < 13 ; counter++){
+            points = Utils.generatePoints(counter, -1000, 1000);
             BruteForce bruteForce = new BruteForce(points);
 
             List<Integer> pointsNums = new ArrayList<>();
