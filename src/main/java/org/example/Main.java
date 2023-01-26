@@ -20,17 +20,20 @@ public class Main {
 
         //testBruteForce();
         //testNearestNeighbour();
-        //compareDistances();
-        BruteForceWithResults();
+        compareDistances();
+        //BruteForceWithResults();
         // default all fields are enclosed in double quotes
         // default separator is a comma
-        NearestNeighbourWithResults();
+        //NearestNeighbourWithResults();
         try (CSVWriter writer = new CSVWriter(new FileWriter("./result.csv"), ';', '"', '"', "\n")) {
             writer.writeAll(statisticlist);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
+
+         //toCompareWithReference();
+
+        }
 
     private static void testBruteForce() {
         System.out.println("Brute force test");
@@ -168,6 +171,39 @@ public class Main {
         }
 
     }
+    private static void toCompareWithReference(){
+        // porównałem z https://github.com/KubaWisniewski/TSPGeneticAlgorithm
+        List<Point> points1 = new ArrayList<>();
+        List<Point> points2 = new ArrayList<>();
+        List<Point> points3 = new ArrayList<>();
+        List<Point> points4 = new ArrayList<>();
+        List<Point> points5 = new ArrayList<>();
+        points1 = Utils.getCitiesFromFile("cities1.txt");
+        points2 = Utils.getCitiesFromFile("cities2.txt");
+        points3 = Utils.getCitiesFromFile("cities3.txt");
+        points4 = Utils.getCitiesFromFile("cities4.txt");
+        points5 = Utils.getCitiesFromFile("cities5.txt");
+        NearestNeighbor nearestNeighbor = new NearestNeighbor(points1);
+        nearestNeighbor.solve();
+        System.out.println("Dlugosc trasy trasy: " + nearestNeighbor.getRouteCost());
+
+        NearestNeighbor nearestNeighbor2 = new NearestNeighbor(points2);
+        nearestNeighbor2.solve();
+        System.out.println("Dlugosc trasy trasy: " + nearestNeighbor2.getRouteCost());
+
+        NearestNeighbor nearestNeighbor3 = new NearestNeighbor(points3);
+        nearestNeighbor3.solve();
+        System.out.println("Dlugosc trasy trasy: " + nearestNeighbor3.getRouteCost());
+
+        NearestNeighbor nearestNeighbor4 = new NearestNeighbor(points4);
+        nearestNeighbor4.solve();
+        System.out.println("Dlugosc trasy trasy: " + nearestNeighbor4.getRouteCost());
+
+        NearestNeighbor nearestNeighbor5 = new NearestNeighbor(points5);
+        nearestNeighbor5.solve();
+        System.out.println("Dlugosc trasy trasy: " + nearestNeighbor5.getRouteCost());
+    }
+
 
 
 }

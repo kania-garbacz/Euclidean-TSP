@@ -107,9 +107,6 @@ public class NearestNeighbor {
         this.liczba_operacji+=3;
         //System.out.println(Distance);
 
-
-
-
         this.memorySize = points.size() + hamiltonCycle.size() + 7;
     }
 
