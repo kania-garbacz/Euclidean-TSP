@@ -13,15 +13,16 @@ public class Main {
 
 
     public static void main(String[] args) {
-        String[] header = {"Liczba punktow","Liczba operacji" ,"Czas dzialania (ms)", "Liczba obiektow","Błąd bezwzględny","Błąd względny"};
+        String[] header = {"Liczba punktow","Liczba operacji" ,"Czas dzialania (ms)","droga_BF" ,"droga_NN","L","Błąd względny"};
 
         statisticlist = new ArrayList<>();
         statisticlist.add(header);
 
         //testBruteForce();
         //testNearestNeighbour();
-        compareDistances();
+        //compareDistances();
         //BruteForceWithResults();
+        toCompareWithReferenceBruteForce();
         // default all fields are enclosed in double quotes
         // default separator is a comma
         //NearestNeighbourWithResults();
@@ -84,19 +85,23 @@ public class Main {
 
     private static void testNearestNeighbour() {
         System.out.println("Nearest neighbour test");
-        for (int counter = 1; counter < 501; counter++) {
+        for (int counter = 1; counter < 10000; counter++) {
             points = Utils.generatePoints(counter, -3, 10);
             NearestNeighbor nearestNeighbor = new NearestNeighbor(points);
 
             //nearestNeighbor.setStartingPoint();
-            long start = System.nanoTime();
+            long start = System.currentTimeMillis();
             nearestNeighbor.solve();
-            long end = System.nanoTime();
+            long end = System.currentTimeMillis();
             //nearestNeighbor.showHamiltonCycle();
 
+
+
+
+
             System.out.println("\n");
-            System.out.println("Dlugosc trasy trasy: " + nearestNeighbor.getRouteCost());
-            System.out.println("Czas dzialania algorytmu: " + (end - start) + " ns");
+            System.out.println("Dlugosc trasy: " + nearestNeighbor.getRouteCost());
+            System.out.println("Czas dzialania algorytmu: " + (end - start) + " ms");
             System.out.println("-------------------------------------------------------------------");
 
             String[] csvData = {String.valueOf(counter), String.valueOf(nearestNeighbor.getLiczba_operacji()), String.valueOf((end - start)), String.valueOf(nearestNeighbor.getMemorySize())};
@@ -142,8 +147,14 @@ public class Main {
         System.out.println("Dlugosc trasy trasy: " + nearestNeighbor.getRouteCost());
     }
     private static void compareDistances(){
-        for (int counter = 1; counter < 13 ; counter++){
-            points = Utils.generatePoints(counter, -1000, 1000);
+        long start = System.currentTimeMillis();
+        int size = 10;
+        for (int counter = 1; counter < 1001 ; counter++){
+
+
+
+
+            points = Utils.generatePoints(size, -10, 10);
             BruteForce bruteForce = new BruteForce(points);
 
             List<Integer> pointsNums = new ArrayList<>();
@@ -155,20 +166,23 @@ public class Main {
 
             NearestNeighbor nearestNeighbor = new NearestNeighbor(points);
             nearestNeighbor.solve();
+
             double droga_NN = nearestNeighbor.getRouteCost();
             double droga_BF = bruteForce.getNajkrotszyDystans();
             double bezwzgledny = Math.sqrt(Math.pow(droga_BF-droga_NN,2));
+
             System.out.println("--------------------------------");
             System.out.println("droga_NN="+droga_NN);
             System.out.println("droga_BF="+droga_BF);
-            System.out.println("bezwzgledny="+bezwzgledny);
             System.out.println("wzgledny="+((bezwzgledny/droga_BF)*100));
             System.out.println("--------------------------------");
-            String[] csvData = {String.valueOf(counter), String.valueOf("---"), String.valueOf("---"), String.valueOf("---"),
-                    String.valueOf(bezwzgledny),String.valueOf((bezwzgledny/droga_BF)*100)};
+
+            String[] csvData = {String.valueOf(size), String.valueOf("---"),String.valueOf("---"), String.valueOf(droga_NN), String.valueOf(droga_BF),String.valueOf((bezwzgledny/droga_BF)*100)};
             statisticlist.add(csvData);
 
         }
+        long end = System.currentTimeMillis();
+        System.out.println("Czas dzialania algorytmu: " + (end - start) + " ms");
 
     }
     private static void toCompareWithReference(){
@@ -203,7 +217,53 @@ public class Main {
         nearestNeighbor5.solve();
         System.out.println("Dlugosc trasy trasy: " + nearestNeighbor5.getRouteCost());
     }
+    private static void toCompareWithReferenceBruteForce(){
+        // porównałem z https://github.com/KubaWisniewski/TSPGeneticAlgorithm
+        List<Point> points1 = new ArrayList<>();
+        List<Point> points2 = new ArrayList<>();
+        List<Point> points3 = new ArrayList<>();
+        List<Point> points4 = new ArrayList<>();
+        List<Point> points5 = new ArrayList<>();
+        points1 = Utils.getCitiesFromFile("cities1.txt");
+        points2 = Utils.getCitiesFromFile("cities2.txt");
+        points3 = Utils.getCitiesFromFile("cities3.txt");
+        points4 = Utils.getCitiesFromFile("cities4.txt");
+        points5 = Utils.getCitiesFromFile("cities5.txt");
 
+        BruteForce bruteForce1 = new BruteForce(points1);
+
+        List<Integer> pointsNums = new ArrayList<>();
+        for (int i = 0; i < points1.size(); i++) {
+            pointsNums.add(i);
+        }
+
+        bruteForce1.solve(new Route(), pointsNums);
+        System.out.println(bruteForce1.getNajkrotszaTrasa().toString());
+        System.out.println("Dlugosc najkrotszej trasy: " + bruteForce1.getNajkrotszyDystans());
+
+        BruteForce bruteForce2 = new BruteForce(points2);
+        bruteForce2.solve(new Route(), pointsNums);
+        System.out.println(bruteForce2.getNajkrotszaTrasa().toString());
+        System.out.println("Dlugosc najkrotszej trasy: " + bruteForce2.getNajkrotszyDystans());
+
+        BruteForce bruteForce3 = new BruteForce(points3);
+        bruteForce3.solve(new Route(), pointsNums);
+        System.out.println(bruteForce3.getNajkrotszaTrasa().toString());
+        System.out.println("Dlugosc najkrotszej trasy: " + bruteForce3.getNajkrotszyDystans());
+
+
+        BruteForce bruteForce4 = new BruteForce(points4);
+        bruteForce4.solve(new Route(), pointsNums);
+        System.out.println(bruteForce4.getNajkrotszaTrasa().toString());
+        System.out.println("Dlugosc najkrotszej trasy: " + bruteForce4.getNajkrotszyDystans());
+
+        BruteForce bruteForce5 = new BruteForce(points5);
+        bruteForce5.solve(new Route(), pointsNums);
+        System.out.println(bruteForce5.getNajkrotszaTrasa().toString());
+        System.out.println("Dlugosc najkrotszej trasy: " + bruteForce5.getNajkrotszyDystans());
+
+
+    }
 
 
 }
